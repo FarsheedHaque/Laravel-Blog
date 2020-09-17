@@ -11,6 +11,18 @@
 
     @endif
 
+    @if(Session::has('updated_post'))
+
+        <p>{{session('updated_post')}}</p>
+
+    @endif
+
+    @if(Session::has('deleted_post'))
+
+        <p>{{session('deleted_post')}}</p>
+
+    @endif
+
 
 
     <table class="table">
@@ -39,7 +51,7 @@
               <td>{{$post->user->name}}</td>
               <td>{{$post->category ? $post->category->name : 'No Category'}}</td>
               <td><a href="{{route('admin.posts.edit', $post->id)}}">{{$post->title}}</a></td>
-              <td>{{$post->body}}</td>
+              <td>{{str_limit($post->body, 10)}}</td>
               <td>{{$post->created_at->diffForHumans()}}</td>
               <td>{{$post->updated_at->diffForHumans()}}</td>
           </tr>
